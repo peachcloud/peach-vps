@@ -111,7 +111,7 @@ for service in SERVICES:
     service_path = os.path.join(MICROSERVICES_SRC_DIR, service_name)
     print("[ BUILIDING SERVICE {} ]".format(service_name))
     subprocess.call(["git", "pull"], cwd=service_path)
-    debian_package_path = subprocess.check_output(["/root/.cargo/bin/cargo", "deb", "--target", "aarch64-unknown-linux-gnu"], cwd=service_path).decode("utf-8").strip()
+    debian_package_path = subprocess.check_output(["/home/rust/.cargo/bin/cargo", "deb", "--target", "aarch64-unknown-linux-gnu"], cwd=service_path).decode("utf-8").strip()
     # remove debian package from repo
     # (in the future we could look at some way of updating with versions instead of removing and adding)
     subprocess.call(["reprepro", "remove", "buster", service_name], cwd=DEBIAN_REPO_DIR)
